@@ -201,6 +201,9 @@ namespace StrontiumServer
             }
         }
 
+        /// <summary>
+        /// Set the operatingSystemVersion variable based on the platform the server is running on.
+        /// </summary>
         private void GetOSVersion()
         {
             if (Environment.OSVersion.Platform == PlatformID.Win32NT)
@@ -264,7 +267,7 @@ namespace StrontiumServer
                             this.operatingSystemVersion = "Windows Server 2008 R2";
                         }
                     }
-                    else
+                    else if (versionInfo.dwMinorVersion == 2)
                     {
                         if (versionType == NativeMethods.VersionNT.Workstation)
                         {
@@ -273,6 +276,17 @@ namespace StrontiumServer
                         else
                         {
                             this.operatingSystemVersion = "Windows Server 2012";
+                        }
+                    }
+                    else
+                    {
+                        if (versionType == NativeMethods.VersionNT.Workstation)
+                        {
+                            this.operatingSystemVersion = "Windows 8.1";
+                        }
+                        else
+                        {
+                            this.operatingSystemVersion = "Windows Server 2012 R2";
                         }
                     }
                 }
